@@ -1,0 +1,20 @@
+name: Day 02 - Pull Request Workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pr-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print PR Trigger Message
+        run: echo "Pull Request triggered Day 02 workflow"
+
+      - name: Show Repository Name
+        run: echo "Repository -> ${{ github.repository }}"
+
+      - name: Print Custom Message
+        run: echo "Learning GitHub Actions - Day 02"
