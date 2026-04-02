@@ -1,0 +1,26 @@
+name: Day 05 - Conditional Workflow
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  conditional-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Branch Name
+        run: echo "Running on branch ${{ github.ref_name }}"
+
+      - name: Run only on main branch
+        if: github.ref_name == 'main'
+        run: echo "This step runs only on MAIN branch"
+
+      - name: Run only on dev branch
+        if: github.ref_name == 'dev'
+        run: echo "This step runs only on DEV branch"
+
+      - name: Always Run Step
+        run: echo "This step runs on all branches"
