@@ -1,0 +1,25 @@
+name: Day 07 - Secrets and Environment Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  secrets-job:
+    runs-on: ubuntu-latest
+
+    env:
+      APP_NAME: DevOps-App
+
+    steps:
+      - name: Print App Name
+        run: echo "Application Name: $APP_NAME"
+
+      - name: Use Secret Value
+        run: echo "Using secret token"
+        env:
+          SECRET_TOKEN: ${{ secrets.MY_SECRET_TOKEN }}
+
+      - name: Simulate Secure Action
+        run: echo "Performing secure operation with hidden values"
