@@ -1,0 +1,23 @@
+name: Day 08 - Artifacts Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  artifact-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create Sample File
+        run: echo "This is a sample artifact file" > output.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sample-artifact
+          path: output.txt
+
+      - name: Confirm Upload
+        run: echo "Artifact uploaded successfully"
