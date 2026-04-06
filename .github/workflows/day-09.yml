@@ -1,0 +1,33 @@
+name: Day 09 - Download Artifacts Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create File
+        run: echo "This file is created in Job 1" > artifact.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: shared-artifact
+          path: artifact.txt
+
+  download-job:
+    runs-on: ubuntu-latest
+    needs: build-job
+
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: shared-artifact
+
+      - name: Display File Content
+        run: cat artifact.txt
