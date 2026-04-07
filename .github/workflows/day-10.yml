@@ -1,0 +1,28 @@
+name: Day 10 - Caching Dependencies Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cache-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Cache Node Modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: node-cache-${{ runner.os }}-v1
+          restore-keys: |
+            node-cache-${{ runner.os }}-
+
+      - name: Simulate Install
+        run: echo "Installing dependencies (cached if available)"
+
+      - name: Simulate Build
+        run: echo "Building project..."
