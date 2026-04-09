@@ -1,0 +1,26 @@
+name: Day 12 - Manual Input Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Select environment"
+        required: true
+        default: "dev"
+      version:
+        description: "Enter version"
+        required: false
+
+jobs:
+  manual-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Selected Environment
+        run: echo "Environment: ${{ github.event.inputs.environment }}"
+
+      - name: Print Version
+        run: echo "Version: ${{ github.event.inputs.version }}"
+
+      - name: Simulate Deployment
+        run: echo "Deploying to ${{ github.event.inputs.environment }}"
