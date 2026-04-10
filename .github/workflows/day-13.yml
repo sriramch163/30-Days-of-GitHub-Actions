@@ -1,0 +1,12 @@
+name: Day 13 - Reusable Workflow Caller
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-reusable:
+    uses: ./.github/workflows/reusable.yml
+    with:
+      message: "Hello from Day 13 workflow"
