@@ -1,0 +1,26 @@
+name: Day 14 - Services Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  service-job:
+    runs-on: ubuntu-latest
+
+    services:
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Print Start Message
+        run: echo "Starting workflow with Redis service"
+
+      - name: Check Redis Port
+        run: nc -zv localhost 6379
+
+      - name: Print Completion Message
+        run: echo "Redis service is up and running"
