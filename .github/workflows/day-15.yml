@@ -1,0 +1,25 @@
+name: Day 15 - Docker Build Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Create Dockerfile
+        run: |
+          echo "FROM nginx:latest" > Dockerfile
+          echo "COPY . /usr/share/nginx/html" >> Dockerfile
+
+      - name: Build Docker Image
+        run: docker build -t my-app:latest .
+
+      - name: List Docker Images
+        run: docker images
