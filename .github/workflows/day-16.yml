@@ -1,0 +1,31 @@
+name: Day 16 - Docker Tag and Push Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-push-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Create Dockerfile
+        run: |
+          echo "FROM nginx:latest" > Dockerfile
+          echo "COPY . /usr/share/nginx/html" >> Dockerfile
+
+      - name: Build Docker Image
+        run: docker build -t my-app:latest .
+
+      - name: Tag Docker Image
+        run: docker tag my-app:latest my-app:v1.0
+
+      - name: Simulate Push to Registry
+        run: echo "Pushing Docker image my-app:v1.0 to registry"
+
+      - name: List Docker Images
+        run: docker images
