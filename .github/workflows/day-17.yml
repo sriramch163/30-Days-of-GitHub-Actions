@@ -1,0 +1,26 @@
+name: Day 17 - Environment Based Workflow
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Identify Environment
+        run: echo "Running on branch ${{ github.ref_name }}"
+
+      - name: Deploy to Development
+        if: github.ref_name == 'dev'
+        run: echo "Deploying to DEV environment"
+
+      - name: Deploy to Production
+        if: github.ref_name == 'main'
+        run: echo "Deploying to PROD environment"
+
+      - name: Completion Message
+        run: echo "Deployment step finished"
