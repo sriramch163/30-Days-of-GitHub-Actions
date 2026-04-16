@@ -1,0 +1,28 @@
+name: Day 19 - Failure Handling Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  failure-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Step 1 - Success
+        run: echo "This step runs successfully"
+
+      - name: Step 2 - Simulate Failure
+        run: exit 1
+
+      - name: Step 3 - Runs Even on Failure
+        if: always()
+        run: echo "This runs even if previous step fails"
+
+      - name: Step 4 - Continue on Error
+        run: exit 1
+        continue-on-error: true
+
+      - name: Step 5 - Final Step
+        run: echo "Workflow continues despite failure"
