@@ -1,0 +1,47 @@
+name: Day 20 - Full CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Simulate Install
+        run: echo "Installing dependencies..."
+
+      - name: Simulate Build
+        run: echo "Building application..."
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: .
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifact
+
+      - name: Simulate Tests
+        run: echo "Running tests..."
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Simulate Deployment
+        run: echo "Deploying application to environment"
