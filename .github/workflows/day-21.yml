@@ -1,0 +1,20 @@
+name: Day 21 - Environment Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: production
+
+    steps:
+      - name: Print Deployment Message
+        run: echo "Deploying to PRODUCTION environment"
+
+      - name: Simulate Deployment
+        run: echo "Application deployed successfully"
