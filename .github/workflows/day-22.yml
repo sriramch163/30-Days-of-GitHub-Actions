@@ -1,0 +1,31 @@
+name: Day 22 - Multi Environment Workflow
+
+on:
+  push:
+    branches:
+      - dev
+      - staging
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Identify Branch
+        run: echo "Branch -> ${{ github.ref_name }}"
+
+      - name: Deploy to Dev
+        if: github.ref_name == 'dev'
+        environment: dev
+        run: echo "Deploying to DEV environment"
+
+      - name: Deploy to Staging
+        if: github.ref_name == 'staging'
+        environment: staging
+        run: echo "Deploying to STAGING environment"
+
+      - name: Deploy to Production
+        if: github.ref_name == 'main'
+        environment: production
+        run: echo "Deploying to PRODUCTION environment"
