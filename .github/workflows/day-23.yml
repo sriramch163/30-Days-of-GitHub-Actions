@@ -1,0 +1,24 @@
+name: Day 23 - Concurrency Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Start Message
+        run: echo "Starting deployment..."
+
+      - name: Simulate Long Deployment
+        run: sleep 20
+
+      - name: Print Completion Message
+        run: echo "Deployment completed"
