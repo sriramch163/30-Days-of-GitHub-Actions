@@ -1,0 +1,21 @@
+name: Day 24 - Permissions Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  permission-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Permissions Info
+        run: echo "Using restricted permissions for workflow"
+
+      - name: Simulate Secure Action
+        run: echo "Performing action with limited access"
