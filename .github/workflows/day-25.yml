@@ -1,0 +1,14 @@
+name: Day 25 - Reusable Workflow with Secrets
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-secure-workflow:
+    uses: ./.github/workflows/reusable-secure.yml
+    with:
+      app-name: "My-DevOps-App"
+    secrets:
+      api-token: ${{ secrets.MY_SECRET_TOKEN }}

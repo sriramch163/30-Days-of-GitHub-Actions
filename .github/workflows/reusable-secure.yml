@@ -1,0 +1,22 @@
+name: Reusable Secure Workflow
+
+on:
+  workflow_call:
+    inputs:
+      app-name:
+        required: true
+        type: string
+    secrets:
+      api-token:
+        required: true
+
+jobs:
+  secure-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print App Name
+        run: echo "App -> ${{ inputs.app-name }}"
+
+      - name: Use Secret
+        run: echo "Using secure token"
