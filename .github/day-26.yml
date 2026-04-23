@@ -1,0 +1,23 @@
+name: Day 26 - Matrix with Environment Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        environment: [dev, staging, production]
+
+    environment: ${{ matrix.environment }}
+
+    steps:
+      - name: Print Environment
+        run: echo "Deploying to ${{ matrix.environment }} environment"
+
+      - name: Simulate Deployment
+        run: echo "Deployment completed for ${{ matrix.environment }}"
