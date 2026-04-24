@@ -1,0 +1,23 @@
+name: Reusable Matrix Workflow
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+    secrets:
+      api-token:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Print Environment
+        run: echo "Deploying to ${{ inputs.environment }}"
+
+      - name: Use Secret
+        run: echo "Using secure token for ${{ inputs.environment }}"
