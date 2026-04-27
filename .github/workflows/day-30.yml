@@ -1,0 +1,57 @@
+name: Day 30 - Final CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: echo "Installing dependencies..."
+
+      - name: Build Application
+        run: echo "Building application..."
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Run Tests
+        run: echo "Running tests..."
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Build Docker Image
+        run: echo "docker build -t my-app:latest ."
+
+      - name: Tag Image
+        run: echo "docker tag my-app:latest my-app:v1.0"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: docker
+    environment: production
+
+    steps:
+      - name: Deploy Application
+        run: echo "Deploying to production..."
+
+  rollback:
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: failure()
+
+    steps:
+      - name: Rollback
+        run: echo "Rollback to previous version"
